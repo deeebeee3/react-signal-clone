@@ -12,6 +12,12 @@ import CustomListItem from "../components/CustomListItem";
 import { auth, db } from "../firebase";
 
 const HomeScreen = ({ navigation }) => {
+  const signOutUser = async () => {
+    const signOut = await auth.signOut();
+
+    navigation.replace("Login");
+  };
+
   useLayoutEffect(() => {
     console.log(auth.currentUser.photoURL);
     navigation.setOptions({
@@ -21,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
       headerTintColor: "#000",
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5} onPress={signOutUser}>
             <Avatar
               rounded
               source={{

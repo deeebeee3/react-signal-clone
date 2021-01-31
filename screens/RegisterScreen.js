@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAvoidingView } from "react-native";
+import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -18,7 +19,23 @@ const RegisterScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
-  const register = () => {};
+  const register = async () => {
+    try {
+      const authUser = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      authUser.user.update({
+        displayName: name,
+        photoURL:
+          imageUrl ||
+          "https://www.pngkey.com/png/full/349-3499617_person-placeholder-person-placeholder.png",
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <KeyboardAvoidingView

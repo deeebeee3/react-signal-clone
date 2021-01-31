@@ -26,7 +26,7 @@ const RegisterScreen = ({ navigation }) => {
         password
       );
 
-      authUser.user.update({
+      authUser.user.updateProfile({
         displayName: name,
         photoURL:
           imageUrl ||

@@ -56,3 +56,9 @@ rnfes - create functional component with stylesheet
 https://reactnativeelements.com/docs
 
 npm install react-native-elements
+
+# Expo Firebase
+
+https://docs.expo.io/guides/using-firebase/
+
+expo install firebase

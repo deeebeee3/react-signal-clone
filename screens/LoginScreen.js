@@ -12,7 +12,7 @@ const LoginScreen = ({ navigation }) => {
   useEffect(() => {
     //gives us back authUser object
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      console.log(authUser);
+      //console.log(authUser);
       if (authUser) {
         //if user authenticated go to Home screen
         //navigation.replace - don't allow user to swipe back to Login screen

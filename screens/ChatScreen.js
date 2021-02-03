@@ -21,6 +21,7 @@ import { auth, db } from "../firebase";
 
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
 
   //set screen header options
   useLayoutEffect(() => {
@@ -86,6 +87,25 @@ const ChatScreen = ({ navigation, route }) => {
 
     setInput("");
   };
+
+  useLayoutEffect(() => {
+    const unsubscribe = db
+      .collection("chats")
+      .doc(route.params.id)
+      .collection("messages")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setMessages(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+
+    //clean up function
+    return unsubscribe;
+  }, [route]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>

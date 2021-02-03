@@ -80,6 +80,7 @@ const HomeScreen = ({ navigation }) => {
 
   const enterChat = (id, chatName) => {
     navigation.navigate("Chat", {
+      // these are route.params which we access in Chat screen
       id,
       chatName,
     });

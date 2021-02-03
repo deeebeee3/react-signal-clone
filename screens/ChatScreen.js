@@ -15,7 +15,9 @@ import {
 import { Avatar } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
-import { Touchable } from "react-native";
+
+import * as firebase from "firebase";
+import { auth, db } from "../firebase";
 
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
@@ -73,6 +75,16 @@ const ChatScreen = ({ navigation, route }) => {
 
   const sendMessage = () => {
     Keyboard.dismiss();
+
+    db.collection("chats").doc(route.params.id).collection("messages").add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: input,
+      displayName: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      photoURL: auth.currentUser.photoURL,
+    });
+
+    setInput("");
   };
 
   return (
@@ -91,6 +103,7 @@ const ChatScreen = ({ navigation, route }) => {
               <TextInput
                 value={input}
                 onChangeText={(text) => setInput(text)}
+                onSubmitEditing={sendMessage}
                 placeholder="Signal Message"
                 style={styles.textInput}
               />

@@ -35,6 +35,23 @@ const ChatScreen = ({ navigation, route }) => {
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </TouchableOpacity>
       ),
+      headerRight: () => (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: 80,
+            marginRight: 20,
+          }}
+        >
+          <TouchableOpacity>
+            <FontAwesome name="video-camera" size={24} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="call" size={24} color="#fff" />
+          </TouchableOpacity>
+        </View>
+      ),
     });
   }, [navigation]);
 

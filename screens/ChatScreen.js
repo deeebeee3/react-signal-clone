@@ -40,6 +40,7 @@ const ChatScreen = ({ navigation, route }) => {
             rounded
             source={{
               uri:
+                messages[0]?.data.photoURL ||
                 "https://www.pngkey.com/png/full/349-3499617_person-placeholder-person-placeholder.png",
             }}
           />
@@ -72,7 +73,7 @@ const ChatScreen = ({ navigation, route }) => {
         </View>
       ),
     });
-  }, [navigation]);
+  }, [navigation, messages]);
 
   const sendMessage = () => {
     Keyboard.dismiss();
@@ -118,7 +119,49 @@ const ChatScreen = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView>{/* Chat goes here */}</ScrollView>
+            <ScrollView contentContainerStyle={{ padding: 15 }}>
+              {messages.map(({ id, data }) =>
+                data.email === auth.currentUser.email ? (
+                  <View key={id} style={styles.reciever}>
+                    <Avatar
+                      source={{ uri: data.photoURL }}
+                      size={30}
+                      position="absolute"
+                      bottom={-15}
+                      right={-5}
+                      rounded
+                      //for the web
+                      containerStyle={{
+                        position: "absolute",
+                        bottom: -15,
+                        right: -5,
+                      }}
+                    />
+                    <Text style={styles.recieverText}>{data.message}</Text>
+                    <Text style={styles.recieverName}>You</Text>
+                  </View>
+                ) : (
+                  <View key={id} style={styles.sender}>
+                    <Avatar
+                      source={{ uri: data.photoURL }}
+                      size={30}
+                      position="absolute"
+                      bottom={-15}
+                      right={-5}
+                      rounded
+                      // for the web
+                      containerStyle={{
+                        position: "absolute",
+                        bottom: -15,
+                        right: -5,
+                      }}
+                    />
+                    <Text style={styles.senderText}>{data.message}</Text>
+                    <Text style={styles.senderName}>{data.displayName}</Text>
+                  </View>
+                )
+              )}
+            </ScrollView>
             <View style={styles.footer}>
               <TextInput
                 value={input}
@@ -164,5 +207,44 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "grey",
     borderRadius: 30,
+  },
+  reciever: {
+    padding: 15,
+    backgroundColor: "#ececec",
+    alignSelf: "flex-end",
+    borderRadius: 20,
+    marginBottom: 20,
+    maxWidth: "80%",
+    position: "relative",
+  },
+  recieverName: {
+    paddingRight: 10,
+    fontSize: 10,
+    color: "#000",
+  },
+  recieverText: {
+    marginBottom: 15,
+    marginRight: 10,
+    fontWeight: "500",
+    color: "#000",
+  },
+  sender: {
+    padding: 15,
+    backgroundColor: "#2b68e6",
+    alignSelf: "flex-start",
+    borderRadius: 20,
+    marginBottom: 20,
+    maxWidth: "80%",
+    position: "relative",
+  },
+  senderName: {
+    paddingRight: 10,
+    fontSize: 10,
+    color: "#fff",
+  },
+  senderText: {
+    marginBottom: 15,
+    fontWeight: "500",
+    color: "#fff",
   },
 });

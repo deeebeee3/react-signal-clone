@@ -62,3 +62,72 @@ npm install react-native-elements
 https://docs.expo.io/guides/using-firebase/
 
 expo install firebase
+
+# Deploy App to Firebase
+
+firebase login
+
+firebase init
+
+◯ Hosting: Configure and deploy Firebase Hosting sites
+
+(arrow keys to choose, spacebar to select, enter to continue)
+
+Use an existing project
+
+(pick the one we created fro this app)
+
+signal-clone-yt-build-50df0 (signal-clone-yt-build)
+
+What do you want to use as your public directory? - type: web-build
+
+(needs to be web-build for expo projects)
+
+Configure as a single-page app (rewrite all urls to /index.ht
+ml)? : Y
+
+Set up automatic builds and deploys with GitHub? N
+
+expo publish
+
+create expo account or login
+
+expo publish
+
+(will start build...)
+
+An Expo user account is required to proceed.
+✔ How would you like to authenticate? › Log in with an existing Expo account
+✔ Username/Email Address: … \***\*\*\*\*\***
+✔ Password: … \***\*\*\*\*\***
+
+Success. You are now logged in as ponstasound.
+
+- Expo SDK: 40.0.0
+- Release channel: default
+- Workflow: Managed
+
+Building optimized bundles and generating sourcemaps...
+Starting Metro Bundler
+Building JavaScript bundle [=========================== ] 90%
+
+Uploading JavaScript bundles
+Publish complete
+
+📝 Manifest: https://exp.host/@ponstasound/signal-clone-yt/index.exp?sdkVersion=40.0.0 Learn more: https://expo.fyi/manifest-url
+⚙️ Project page: https://expo.io/@ponstasound/signal-clone-yt Learn more: https://expo.fyi/project-page
+
+TO DEPLOY TO THE WEB:
+
+expo build:web
+
+creates a web build folder in project - once done:
+
+firebase deploy
+
+(will upload files in web-build folder to firebase, and host them)
+
+Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/signal-clone-yt-build-50df0/overview
+Hosting URL: https://signal-clone-yt-build-50df0.web.app
